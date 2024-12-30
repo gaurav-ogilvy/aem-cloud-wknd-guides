@@ -1,0 +1,20 @@
+<sly data-sly-use.timeline="com.adobe.aem.guides.wknd.core.models.Timeline"
+    data-sly-use.template="core/wcm/components/commons/v1/templates.html"
+    data-sly-test.hasContent="${timeline.entries}">
+    <div class="cmp-timeline">
+        <div class="cmp-timeline__container" data-sly-list.entry="${timeline.entries}">
+            <div class="cmp-timeline__entry ${entry.left ? 'cmp-timeline__entry--left' : 'cmp-timeline__entry--right'}">
+                <div class="cmp-timeline__content">
+                    <div class="cmp-timeline__date">${entry.date}</div>
+                    <div class="cmp-timeline__image">
+                        <img src="${entry.image}" alt="${entry.title}" class="cmp-timeline__img" />
+                    </div>
+                    <h3 class="cmp-timeline__title">${entry.title}</h3>
+                    <div class="cmp-timeline__attribution" data-sly-test="${entry.attribution}">${entry.attribution}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</sly>
+<sly data-sly-call="${template.placeholder @ isEmpty=!hasContent}"></sly>

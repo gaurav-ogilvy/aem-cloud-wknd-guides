@@ -62,12 +62,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Model(
-        adaptables = {SlingHttpServletRequest.class},
-        adapters = {ImageList.class},
-        resourceType = {ImageListImpl.RESOURCE_TYPE},
-        defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL
-)
+@Model(adaptables = { SlingHttpServletRequest.class }, adapters = { ImageList.class }, resourceType = {
+        ImageListImpl.RESOURCE_TYPE }, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 public class ImageListImpl implements ImageList {
     private static final Logger log = LoggerFactory.getLogger(ImageListImpl.class);
 
@@ -89,7 +85,8 @@ public class ImageListImpl implements ImageList {
 
     /**
      * The Image List Component extends the AEM WCM Core Component.
-     * This injection creates an instance of the Core Components List component, and allows its methods to be called by
+     * This injection creates an instance of the Core Components List component, and
+     * allows its methods to be called by
      * the WKND Image List component, following the delegation pattern.
      *
      * Note this is made @Optional to allow for Unit Testing of this Sling Model.
@@ -104,10 +101,12 @@ public class ImageListImpl implements ImageList {
     public final Collection<ImageList.ListItem> getListItems() {
         if (imageListItems == null) {
             if (coreList == null) {
-                log.warn("Could not locate the AEM WCM Core Components List SlingModel via this component's ResourceSuperType. Returning an empty list.");
+                log.warn(
+                        "Could not locate the AEM WCM Core Components List SlingModel via this component's ResourceSuperType. Returning an empty list.");
                 imageListItems = Collections.EMPTY_LIST;
             } else {
-                // Calls the AEM WCM Core Components List component's `getListItems()` methods, transforms them into ImageListItem objects.
+                // Calls the AEM WCM Core Components List component's `getListItems()` methods,
+                // transforms them into ImageListItem objects.
                 imageListItems = coreList.getListItems().stream()
                         .map(listItem -> new ImageListItemImpl(request.getResourceResolver(), listItem, getId()))
                         .filter(imageListItem -> !imageListItem.isEmpty())
@@ -134,9 +133,9 @@ public class ImageListImpl implements ImageList {
         Resource imageListResource = this.request.getResource();
         if (ComponentUtils.isDataLayerEnabled(imageListResource)) {
             return DataLayerBuilder.forComponent()
-                .withId(() -> getId())
-                .withType(() -> RESOURCE_TYPE)
-                .build();
+                    .withId(() -> getId())
+                    .withType(() -> RESOURCE_TYPE)
+                    .build();
         }
         return null;
     }
@@ -151,8 +150,8 @@ public class ImageListImpl implements ImageList {
         private final String parentId;
 
         public ImageListItemImpl(final ResourceResolver resourceResolver,
-                                 final com.adobe.cq.wcm.core.components.models.ListItem listItem,
-                                 final String parentId) {
+                final com.adobe.cq.wcm.core.components.models.ListItem listItem,
+                final String parentId) {
 
             final PageManager pageManager = resourceResolver.adaptTo(PageManager.class);
             this.wrappedListItem = listItem;
@@ -192,34 +191,37 @@ public class ImageListImpl implements ImageList {
         public ComponentData getData() {
             if (ComponentUtils.isDataLayerEnabled(image)) {
                 return DataLayerBuilder.forComponent()
-                    .withId(this::getId)
-                    .withType(() -> ImageListImpl.RESOURCE_TYPE + "/"  + IMAGE_LIST_ITEM_SUFFIX)
-                    .withTitle(this::getTitle)
-                    .withDescription(this::getDescription)
-                    .withLinkUrl(this::getURL)
-                    .withParentId(() -> this.parentId)
-                    .build();
-                }
+                        .withId(this::getId)
+                        .withType(() -> ImageListImpl.RESOURCE_TYPE + "/" + IMAGE_LIST_ITEM_SUFFIX)
+                        .withTitle(this::getTitle)
+                        .withDescription(this::getDescription)
+                        .withLinkUrl(this::getURL)
+                        .withParentId(() -> this.parentId)
+                        .build();
+            }
             return null;
         }
 
         @Override
         public String getId() {
-            return ComponentUtils.generateId(StringUtils.join(parentId, ComponentUtils.ID_SEPARATOR, IMAGE_LIST_ITEM_SUFFIX), getURL());
+            return ComponentUtils.generateId(
+                    StringUtils.join(parentId, ComponentUtils.ID_SEPARATOR, IMAGE_LIST_ITEM_SUFFIX), getURL());
         }
     }
 
     /**
-     * Helper method that searches an AEM Page for 1 or more resources that are of a specified sling:resourceType.
+     * Helper method that searches an AEM Page for 1 or more resources that are of a
+     * specified sling:resourceType.
      *
      * Note the order is by JCR Path, ascending.
      *
-     * @param page the AEM Page to search
+     * @param page              the AEM Page to search
      * @param slingResourceType The sling:resourceType too look for
-     * @param limit the max number of resources to return
+     * @param limit             the max number of resources to return
      * @return A list of resources that have a match sling:resourceType value
      */
-    protected java.util.List<Resource> findPageComponentResources(final Page page, final String slingResourceType, int limit) {
+    protected java.util.List<Resource> findPageComponentResources(final Page page, final String slingResourceType,
+            int limit) {
         final java.util.List<Resource> componentResources = new ArrayList<>();
 
         if (page == null) {
@@ -227,26 +229,28 @@ public class ImageListImpl implements ImageList {
             return componentResources;
         }
 
-        final Map<String, String> params = ImmutableMap.<String, String>builder().
-                put(PathPredicateEvaluator.PATH, page.getContentResource().getPath()).
-                put(TypePredicateEvaluator.TYPE, JcrConstants.NT_UNSTRUCTURED).
-                put(JcrPropertyPredicateEvaluator.PROPERTY, JcrResourceConstants.SLING_RESOURCE_TYPE_PROPERTY).
-                put(JcrPropertyPredicateEvaluator.PROPERTY + "." + JcrPropertyPredicateEvaluator.VALUE, slingResourceType).
-                put(PredicateConverter.GROUP_PARAMETER_PREFIX + "." + PredicateGroup.PARAM_LIMIT, String.valueOf(limit)).
-                put(PredicateConverter.GROUP_PARAMETER_PREFIX + "." +  PredicateGroup.PARAM_GUESS_TOTAL, "true").
-                put(Predicate.ORDER_BY, "@jcr:path").
-                put(Predicate.ORDER_BY + "." + Predicate.PARAM_SORT , Predicate.SORT_ASCENDING).
-                build();
+        final Map<String, String> params = ImmutableMap.<String, String>builder()
+                .put(PathPredicateEvaluator.PATH, page.getContentResource().getPath())
+                .put(TypePredicateEvaluator.TYPE, JcrConstants.NT_UNSTRUCTURED)
+                .put(JcrPropertyPredicateEvaluator.PROPERTY, JcrResourceConstants.SLING_RESOURCE_TYPE_PROPERTY)
+                .put(JcrPropertyPredicateEvaluator.PROPERTY + "." + JcrPropertyPredicateEvaluator.VALUE,
+                        slingResourceType)
+                .put(PredicateConverter.GROUP_PARAMETER_PREFIX + "." + PredicateGroup.PARAM_LIMIT,
+                        String.valueOf(limit))
+                .put(PredicateConverter.GROUP_PARAMETER_PREFIX + "." + PredicateGroup.PARAM_GUESS_TOTAL, "true")
+                .put(Predicate.ORDER_BY, "@jcr:path")
+                .put(Predicate.ORDER_BY + "." + Predicate.PARAM_SORT, Predicate.SORT_ASCENDING).build();
 
         final long start = System.currentTimeMillis();
 
         final Iterator<Resource> resources = queryBuilder.createQuery(PredicateGroup.create(params),
                 request.getResourceResolver().adaptTo(Session.class)).getResult().getResources();
 
-        // Handle QueryBuilder's leakingResourceResolver; Make sure to close it manually.
+        // Handle QueryBuilder's leakingResourceResolver; Make sure to close it
+        // manually.
         ResourceResolver leakingResourceResolver = null;
 
-        while(resources.hasNext()) {
+        while (resources.hasNext()) {
             final Resource resource = resources.next();
 
             if (leakingResourceResolver == null) {
@@ -260,16 +264,21 @@ public class ImageListImpl implements ImageList {
             leakingResourceResolver.close();
         }
 
-        log.debug("Query searching for component of type [ {} ] over [ {} ] took [ {} ms ]", slingResourceType, page.getContentResource().getPath(), System.currentTimeMillis() - start);
+        log.debug("Query searching for component of type [ {} ] over [ {} ] took [ {} ms ]", slingResourceType,
+                page.getContentResource().getPath(), System.currentTimeMillis() - start);
 
         return componentResources;
     }
 
     /**
-     * ResourceWrapper which is used to include an Image Component content resource, and ensure it's authored configuration does not conflict with the desired renditioning for the Image List component.
-     * The Image List component should ONLY display the image without captions, titles, etc.
+     * ResourceWrapper which is used to include an Image Component content resource,
+     * and ensure it's authored configuration does not conflict with the desired
+     * renditioning for the Image List component.
+     * The Image List component should ONLY display the image without captions,
+     * titles, etc.
      *
-     * Note that this resource wrapper will not effect the Image Component's style, which is dictated at the policy level.
+     * Note that this resource wrapper will not effect the Image Component's style,
+     * which is dictated at the policy level.
      */
     protected static class SimpleImageComponentResource extends ResourceWrapper {
         private static final String PN_FILE_REFERENCE = "fileReference";
