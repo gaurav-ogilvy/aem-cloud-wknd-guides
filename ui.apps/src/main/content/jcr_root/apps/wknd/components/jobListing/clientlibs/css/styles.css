@@ -1,0 +1,120 @@
+.cmp-job-listing {
+    padding: 2rem;
+    font-family: Arial, sans-serif;
+}
+
+.cmp-job-listing__title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+.cmp-job-listing__container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.cmp-job-listing__container--grid {
+    display: grid;
+    grid-template-columns: repeat(var(--items-per-row, 3), 1fr);
+    gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+    .cmp-job-listing__container--grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .cmp-job-listing__container--grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.cmp-job-listing__card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.cmp-job-listing__card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.cmp-job-listing__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.cmp-job-listing__company-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.cmp-job-listing__company-logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.cmp-job-listing__company-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.cmp-job-listing__company-name {
+    font-weight: 600;
+    color: #333;
+}
+
+.cmp-job-listing__posted-date {
+    font-size: 0.875rem;
+    color: #666;
+}
+
+.cmp-job-listing__category {
+    font-size: 0.875rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 16px;
+    background-color: #f0f0f0;
+    color: #666;
+    text-transform: capitalize;
+}
+
+.cmp-job-listing__job-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+    margin: 1rem 0 0.5rem;
+}
+
+.cmp-job-listing__location {
+    font-size: 0.875rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.cmp-job-listing__progress {
+    margin-top: 1rem;
+}
+
+.cmp-job-listing__progress-bar {
+    height: 4px;
+    background-color: #e10098;
+    border-radius: 2px;
+    margin-bottom: 0.5rem;
+}
+
+.cmp-job-listing__applications {
+    font-size: 0.875rem;
+    color: #666;
+} 

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Job Listing"
+    sling:resourceType="cq/gui/components/authoring/dialog">
+    <content
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/container">
+        <items jcr:primaryType="nt:unstructured">
+            <tabs
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/tabs"
+                maximized="{Boolean}true">
+                <items jcr:primaryType="nt:unstructured">
+                    <properties
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Properties"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <columns
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                                margin="{Boolean}true">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <column
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <title
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                fieldLabel="Component Title"
+                                                name="./title"/>
+                                            <layout
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                                                fieldLabel="Layout"
+                                                name="./layout">
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <grid
+                                                        jcr:primaryType="nt:unstructured"
+                                                        text="Grid"
+                                                        value="grid"/>
+                                                    <list
+                                                        jcr:primaryType="nt:unstructured"
+                                                        text="List"
+                                                        value="list"/>
+                                                </items>
+                                            </layout>
+                                            <itemsPerRow
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                                                fieldLabel="Items per Row"
+                                                name="./itemsPerRow">
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <two
+                                                        jcr:primaryType="nt:unstructured"
+                                                        text="2"
+                                                        value="2"/>
+                                                    <three
+                                                        jcr:primaryType="nt:unstructured"
+                                                        text="3"
+                                                        value="3"/>
+                                                    <four
+                                                        jcr:primaryType="nt:unstructured"
+                                                        text="4"
+                                                        value="4"/>
+                                                </items>
+                                            </itemsPerRow>
+                                        </items>
+                                    </column>
+                                </items>
+                            </columns>
+                        </items>
+                    </properties>
+                    <jobs
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Job Listings"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <jobList
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+                                composite="{Boolean}true"
+                                fieldLabel="Job Listings">
+                                <field
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/container"
+                                    name="./jobListings">
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <companyLogo
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="cq/gui/components/authoring/dialog/fileupload"
+                                            fieldLabel="Company Logo"
+                                            fileNameParameter="./fileName"
+                                            fileReferenceParameter="./companyLogo"
+                                            mimeTypes="[image/gif,image/jpeg,image/png,image/webp,image/svg+xml]"
+                                            multiple="{Boolean}false"
+                                            name="./file"/>
+                                        <companyName
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                            fieldLabel="Company Name"
+                                            name="./companyName"/>
+                                        <postedDate
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/form/datepicker"
+                                            fieldLabel="Posted Date"
+                                            name="./postedDate"/>
+                                        <jobTitle
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                            fieldLabel="Job Title"
+                                            name="./jobTitle"/>
+                                        <location
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                            fieldLabel="Location"
+                                            name="./location"/>
+                                        <category
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                                            fieldLabel="Category"
+                                            name="./category">
+                                            <items jcr:primaryType="nt:unstructured">
+                                                <design
+                                                    jcr:primaryType="nt:unstructured"
+                                                    text="Design"
+                                                    value="design"/>
+                                                <product
+                                                    jcr:primaryType="nt:unstructured"
+                                                    text="Product"
+                                                    value="product"/>
+                                                <development
+                                                    jcr:primaryType="nt:unstructured"
+                                                    text="Development"
+                                                    value="development"/>
+                                            </items>
+                                        </category>
+                                        <maxCapacity
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                                            fieldLabel="Maximum Capacity"
+                                            min="{Long}1"
+                                            name="./maxCapacity"/>
+                                        <currentApplications
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                                            fieldLabel="Current Applications"
+                                            min="{Long}0"
+                                            name="./currentApplications"/>
+                                    </items>
+                                </field>
+                            </jobList>
+                        </items>
+                    </jobs>
+                </items>
+            </tabs>
+        </items>
+    </content>
+</jcr:root> 
