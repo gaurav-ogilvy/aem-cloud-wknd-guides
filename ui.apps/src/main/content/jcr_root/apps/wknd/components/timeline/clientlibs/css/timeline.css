@@ -1,0 +1,94 @@
+/* Timeline Component Styles */
+.cmp-timeline {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Timeline line */
+.cmp-timeline::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background-color: #e6e6e6;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -1px;
+}
+
+/* Timeline Entry */
+.cmp-timeline__entry {
+    position: relative;
+    width: 50%;
+    margin-bottom: 40px;
+}
+
+/* Left entries */
+.cmp-timeline__entry--left {
+    left: 0;
+    padding-right: 40px;
+}
+
+/* Right entries */
+.cmp-timeline__entry--right {
+    left: 50%;
+    padding-left: 40px;
+}
+
+/* Entry content */
+.cmp-timeline__content {
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Date styling */
+.cmp-timeline__date {
+    color: #ee1d52;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+/* Title styling */
+.cmp-timeline__title {
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+/* Image styling */
+.cmp-timeline__image {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+/* Source attribution */
+.cmp-timeline__source {
+    font-size: 0.875rem;
+    color: #666;
+    font-style: italic;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .cmp-timeline::before {
+        left: 31px;
+    }
+
+    .cmp-timeline__entry {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+
+    .cmp-timeline__entry--left,
+    .cmp-timeline__entry--right {
+        left: 0;
+    }
+}
