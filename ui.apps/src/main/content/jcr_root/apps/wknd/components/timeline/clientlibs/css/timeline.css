@@ -1,94 +1,93 @@
 /* Timeline Component Styles */
 .cmp-timeline {
-    position: relative;
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
 }
 
-/* Timeline line */
 .cmp-timeline::before {
-    content: '';
-    position: absolute;
-    width: 2px;
-    background-color: #e6e6e6;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    margin-left: -1px;
+    display: none;
 }
 
 /* Timeline Entry */
 .cmp-timeline__entry {
-    position: relative;
-    width: 50%;
-    margin-bottom: 40px;
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 0;
+    width: 100%;
+    padding: 0;
 }
 
-/* Left entries */
-.cmp-timeline__entry--left {
-    left: 0;
-    padding-right: 40px;
-}
-
-/* Right entries */
+.cmp-timeline__entry--left,
 .cmp-timeline__entry--right {
-    left: 50%;
-    padding-left: 40px;
+    left: auto;
+    padding: 0;
 }
 
 /* Entry content */
 .cmp-timeline__content {
-    padding: 20px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Date styling */
 .cmp-timeline__date {
     color: #ee1d52;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     text-transform: uppercase;
 }
 
 /* Title styling */
 .cmp-timeline__title {
-    font-size: 1.25rem;
-    margin-bottom: 15px;
-    line-height: 1.4;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    line-height: 1.3;
 }
 
 /* Image styling */
 .cmp-timeline__image {
-    width: 100%;
-    height: auto;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
-    margin-bottom: 15px;
+    margin-right: 20px;
+    overflow: hidden;
+}
+
+.cmp-timeline__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* Source attribution */
-.cmp-timeline__source {
+.cmp-timeline__attribution {
     font-size: 0.875rem;
     color: #666;
     font-style: italic;
+    margin-top: 5px;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .cmp-timeline::before {
-        left: 31px;
+    .cmp-timeline {
+        grid-template-columns: 1fr;
     }
 
     .cmp-timeline__entry {
-        width: 100%;
-        padding-left: 70px;
-        padding-right: 25px;
+        flex-direction: column;
+        align-items: center;
     }
 
-    .cmp-timeline__entry--left,
-    .cmp-timeline__entry--right {
-        left: 0;
+    .cmp-timeline__image {
+        margin-right: 0;
+        margin-bottom: 10px;
     }
 }
